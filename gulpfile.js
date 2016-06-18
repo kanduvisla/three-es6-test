@@ -10,7 +10,7 @@ gulp.task("watch", function(){
   gulp.watch("./src/**/*.js", function(evt){
     console.log("Change detected in " + evt.path)
     browserify({ debug: true })
-      .transform(babelify)
+      .transform(babelify, {presets: ["es2015", "stage-0"]})
       .require("./src/index.js", { entry: true })
       .bundle()
       .on("error", function (err) { console.log("Error: " + err.message) })

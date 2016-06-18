@@ -28,6 +28,7 @@
     },
     "globals": {
         "console": true,
-        "require": true
+        "require": true,
+        "THREE": true
     }
 }
