@@ -1,3 +1,5 @@
+import Step from "../util/step"
+
 /**
  * A 3D Snake :-)
  */
@@ -7,11 +9,15 @@ export default class Snake
    * Constructor call
    */
   constructor() {
-    this.step = 0
-    this.inc = 0.01
+    // The number of iterations to create a random path
+    this.step = new Step({
+      iterations: 10,
+      increase: 0.2,
+      maxSinMultiplier: 1,
+      maxCosMultiplier: 1
+    })
     
     this.length = 30
-    this.segmentSize = 30
     
     // Create the initial geometry
     this.geometry = new THREE.Geometry()
@@ -20,7 +26,7 @@ export default class Snake
       // Create vertices for the X, Y and Z-position:
       this.geometry.vertices.push(
         new THREE.Vector3(
-          (i * this.segmentSize) - (this.segmentSize * (this.length / 2)),
+          0,
           0,
           0
         )
@@ -35,19 +41,19 @@ export default class Snake
     // Create a mesh, containing the geometry:
     this.mesh = new THREE.Line(this.geometry, material)
   }
-
+  
   /**
    * Update method
    */
   update() {
-    this.step += this.inc
-
+    this.step.update()
+    
     for (let [index, vertice] of this.geometry.vertices.entries()) {
-      //vertice.x = Math.random() * 100
-      vertice.y = Math.sin(this.step + index / 3) * this.segmentSize
-      vertice.z = Math.cos(this.step + index / 3) * this.segmentSize
+      vertice.x = this.step.sin(index) * 250
+      vertice.y = this.step.cos(index) * 250
+      vertice.z = 0 //this.step.sin(index / 5) * 250
     }
-
+    
     // Trigger a re-calculation of the geometry:
     this.geometry.verticesNeedUpdate = true
   }
