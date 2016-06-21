@@ -16,15 +16,15 @@ export default class Camera {
 
   update() {
 
-    this.camera.position.x = Math.sin(this.step) * 2500
-    this.camera.position.y = Math.sin(20 + this.step * 0.811113) * 2500
-    this.camera.position.z = Math.sin(40 + this.step * 1.111113) * 2500
+    this.camera.position.x = -125 + Math.sin(this.step) * 250
+    this.camera.position.y = -125 + Math.sin(20 + this.step * 0.811113) * 250
+    this.camera.position.z = -125 + Math.sin(40 + this.step * 1.111113) * 250
 
     this.step += this.inc * 10
 
-    this.x = Math.sin(this.step) * 2500
-    this.y = Math.sin(20 + this.step * 0.811113) * 2500
-    this.z = Math.sin(40 + this.step * 1.111113) * 2500
+    this.x = -125 + Math.sin(this.step) * 250
+    this.y = -125 + Math.sin(20 + this.step * 0.811113) * 250
+    this.z = -125 + Math.sin(40 + this.step * 1.111113) * 250
 
     this.step -= this.inc * 9
 

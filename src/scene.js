@@ -1,5 +1,6 @@
 import Box from "./scene/box"
 import Camera from "./scene/camera"
+import Snake from "./scene/snake"
 
 export default class Scene {
   /**
@@ -10,6 +11,7 @@ export default class Scene {
     let count = 1000
 
     // Create boxes:
+    /*
     this.boxes = []
     for (let i=0; i<count; i+=1) {
       let box = new Box()
@@ -27,20 +29,27 @@ export default class Scene {
       this.scene.add(box.mesh)
       this.boxes.push(box)
     }
+    */
 
-    this.camera = new Camera(camera)
-    this.scene.add(this.camera.mesh)
+    this.snake = new Snake()
+    this.scene.add(this.snake.mesh)
+    
+    // this.camera = new Camera(camera)
+    // this.scene.add(this.camera.mesh)
   }
 
   /**
    * Update call
    */
   update() {
+    /*
     for (let box of this.boxes) {
       box.mesh.rotateX(box.rotateInc.x)
       box.mesh.rotateY(box.rotateInc.y)
       box.mesh.rotateZ(box.rotateInc.z)
     }
-    this.camera.update()
+    */
+    // this.camera.update()
+    this.snake.update()
   }
 }
