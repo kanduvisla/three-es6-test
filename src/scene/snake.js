@@ -11,7 +11,8 @@ export default class Snake
     this.inc = 0.01
     
     this.length = 30
-
+    this.segmentSize = 30
+    
     // Create the initial geometry
     this.geometry = new THREE.Geometry()
     
@@ -19,9 +20,9 @@ export default class Snake
       // Create vertices for the X, Y and Z-position:
       this.geometry.vertices.push(
         new THREE.Vector3(
-          -1000 + Math.random() * 2000,
-          -1000 + Math.random() * 2000,
-          -1000 + Math.random() * 2000
+          (i * this.segmentSize) - (this.segmentSize * (this.length / 2)),
+          0,
+          0
         )
       )
       
@@ -30,11 +31,9 @@ export default class Snake
     }
     
     let material = new THREE.LineBasicMaterial()
-    
+
     // Create a mesh, containing the geometry:
     this.mesh = new THREE.Line(this.geometry, material)
-    
-    console.log(this.mesh)
   }
 
   /**
@@ -42,7 +41,13 @@ export default class Snake
    */
   update() {
     this.step += this.inc
-    
+
+    for (let [index, vertice] of this.geometry.vertices.entries()) {
+      //vertice.x = Math.random() * 100
+      vertice.y = Math.sin(this.step + index / 3) * this.segmentSize
+      vertice.z = Math.cos(this.step + index / 3) * this.segmentSize
+    }
+
     // Trigger a re-calculation of the geometry:
     this.geometry.verticesNeedUpdate = true
   }
